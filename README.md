@@ -4,7 +4,7 @@
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-A curated registry of tools, models, microservices, and integrations for **text-to-speech (TTS) with NVIDIA technology**. Covers cloud APIs, self-hosted NIMs, embedded Jetson deployments, voice cloning, and agent-facing MCP integrations.
+A curated registry of tools, models, microservices, and integrations for **text-to-speech (TTS) with NVIDIA technology**. Covers cloud APIs, self-hosted NVIDIA Speech NIM Microservices, embedded Jetson deployments, voice cloning, and agent-facing MCP integrations.
 
 ---
 
@@ -29,7 +29,7 @@ A curated registry of tools, models, microservices, and integrations for **text-
 
 | Product | Best For | Deployment |
 |---|---|---|
-| **NVIDIA TTS NIM** | Production self-hosted TTS microservice | Cloud / data center / workstation GPUs |
+| **NVIDIA Speech NIM Microservices** | Production self-hosted TTS microservice | Cloud / data center / workstation GPUs |
 | **NVIDIA Riva TTS** | Full speech-AI stack (ASR + TTS + NMT) | Self-hosted Docker or Jetson |
 | **Riva Studio / NeMo TTS** | Custom voice training and fine-tuning | Cloud training, on-prem GPUs |
 | **NVIDIA ACE / Audio2Face** | Digital-human facial animation driven by TTS audio | RTX workstations, cloud |
@@ -38,7 +38,7 @@ A curated registry of tools, models, microservices, and integrations for **text-
 
 ## TTS NIM Microservice
 
-The [NVIDIA TTS NIM](https://docs.nvidia.com/nim/speech/latest/tts/index.html) packages pre-trained NeMo models into an optimized, self-contained inference container.
+The [NVIDIA Speech NIM Microservices](https://docs.nvidia.com/nim/speech/latest/tts/index.html) package pre-trained NeMo models into optimized, self-contained inference containers.
 
 ### Available models
 
@@ -53,7 +53,9 @@ The [NVIDIA TTS NIM](https://docs.nvidia.com/nim/speech/latest/tts/index.html) p
 
 - **[TTS NIM Documentation](https://docs.nvidia.com/nim/speech/latest/tts/index.html)** `Official`
 - **[TTS NIM Tutorial](https://docs.nvidia.com/nim/speech/latest/tts/tutorial.html)** `Official`
-- **[NGC TTS NIM Container](https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/collections/text_to_speech)** `Official`
+- **[Speech NIM models](https://docs.nvidia.com/nim/speech/latest/about/speech-nim-models.html)** `Official` — per-model NIM catalog and containers
+- **[Chatterbox TTS Multilingual](https://github.com/resemble-ai/chatterbox)** `Community`
+- **[Chatterbox TTS NIM deployment docs](https://docs.nvidia.com/nim/speech/26.05.0/tts/deploy-tts-model.html)** `Official`
 - **Quick run** (requires NGC login / NVAIE entitlement):
   ```bash
   docker run --gpus all --runtime=nvidia -it \
@@ -90,8 +92,11 @@ For custom voices and fine-tuned models.
 
 - **[NVIDIA Riva Studio](https://www.nvidia.com/en-us/gpu-cloud/riva-studio/)** `Official` — No-code voice customization, recording, training, and deployment.
 - **[NVIDIA NeMo](https://github.com/NVIDIA/NeMo)** `Official` — End-to-end framework for building and customizing speech and language models.
+- **[NVIDIA NeMo Speech](https://github.com/NVIDIA-NeMo/Speech)** `Official` — Dedicated repository for ASR and TTS research and pre-trained models (split from the main NeMo project).
 - **[NeMo TTS Models](https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/tts/intro.html)** `Official` — Tacotron2, FastPitch, RadTTS, Mixer-TTS, and more.
 - **[NeMo Curator](https://github.com/NVIDIA/NeMo-Curator)** `Official` — Data-curation tools for training custom TTS datasets.
+- **[MagpieTTS multilingual open-weight checkpoint](https://huggingface.co/nvidia/magpie_tts_multilingual_357m)** `Official/Open` — Open-weight MagpieTTS multilingual 357M checkpoint.
+- **[MagpieTTS multilingual demo](https://huggingface.co/spaces/nvidia/magpie_tts_multilingual_demo)** `Official` — Hugging Face demo space for MagpieTTS multilingual.
 
 ---
 
@@ -102,7 +107,14 @@ While not pure TTS, these products consume TTS output to animate digital humans.
 - **[NVIDIA ACE](https://www.nvidia.com/en-us/ai/ace/)** `Official` — Avatar Cloud Engine combining Riva ASR/TTS, NeMo LLMs, and Audio2Face animation.
 - **[NVIDIA Audio2Face](https://www.nvidia.com/en-us/omniverse/audio2face/)** `Official` — Generate real-time 3D facial animation from audio.
 - **[Audio2Face NIM](https://build.nvidia.com/nvidia/audio2face-3d)** `Official` — Self-hosted microservice for facial animation on RTX.
-- **[NVIDIA voice-agent-examples](https://github.com/NVIDIA/voice-agent-examples)** `Official` — Reference voice-agent pipelines using Riva/NeMo TTS, ASR, and LLMs.
+- **[NVIDIA Nemotron 3 VoiceChat](https://build.nvidia.com/nvidia/nemotron-voicechat/modelcard)** `Official` — Speech-to-speech conversational voice AI; early access via [developer.nvidia.com](https://developer.nvidia.com/nemotron-voicechat-early-access). Blog: [Building NVIDIA Nemotron 3 Agents](https://developer.nvidia.com/blog/building-nvidia-nemotron-3-agents-for-reasoning-multimodal-rag-voice-and-safety/).
+
+## Speech-to-Speech / Voice AI
+
+End-to-end voice agents and blueprints built on NVIDIA speech models.
+
+- **[NVIDIA voice-agent-examples](https://github.com/NVIDIA/voice-agent-examples)** `Official` — Reference voice-agent pipelines using NemotronASRService / NemotronTTSService (renamed from RivaASRService / RivaTTSService as of v0.4.0).
+- **[NVIDIA Nemotron Voice Agent Blueprint](https://build.nvidia.com/nvidia/nemotron-voice-agent)** `Official` — Build deployable voice agents with NVIDIA Nemotron speech and reasoning models. Repository: [NVIDIA-AI-Blueprints/nemotron-voice-agent](https://github.com/NVIDIA-AI-Blueprints/nemotron-voice-agent). Container: [catalog.ngc.nvidia.com/nvidia/blueprint/nemotron-voice-agent](https://catalog.ngc.nvidia.com/orgs/nvidia/teams/blueprint/containers/nemotron-voice-agent).
 
 ---
 
@@ -110,8 +122,8 @@ While not pure TTS, these products consume TTS output to animate digital humans.
 
 | Target | Product | Notes |
 |---|---|---|
-| **Cloud / data center** | TTS NIM, Riva Server | Requires NVAIE for production; Docker/Helm on Kubernetes |
-| **Workstation / RTX PC** | TTS NIM, Riva, Audio2Face | Local inference for dev/test and digital humans |
+| **Cloud / data center** | Speech NIM, Riva Server | Requires NVAIE for production; Docker/Helm on Kubernetes. **Note:** Riva Server x86 data-center deployments are deprecated as of Riva 2.24.0; use NVIDIA Speech NIM for x86/cloud TTS. |
+| **Workstation / RTX PC** | Speech NIM, Riva, Audio2Face | Local inference for dev/test and digital humans |
 | **Embedded / Jetson** | Riva TTS (arm64 quickstart) | Optimized models for Jetson Orin / Nano |
 | **Hosted API** | build.nvidia.com NIM endpoints | Prototyping and low-volume inference; rate-limited |
 
@@ -134,7 +146,7 @@ While not pure TTS, these products consume TTS output to animate digital humans.
 - **[Riva C++ / gRPC API](https://docs.nvidia.com/deeplearning/riva/user-guide/docs/protoc-docs/reference/protoc.html)** `Official` — Low-level gRPC definitions.
 - **[LiveKit NVIDIA Riva TTS plugin](https://docs.livekit.io/agents/models/tts/nvidia/)** `Community` — Use Riva TTS in LiveKit voice agents.
   - Install: `uv add "livekit-agents[nvidia]~=1.5"`
-- **[NVIDIA Pipecat voice-agent-examples](https://github.com/NVIDIA/voice-agent-examples)** `Official` — Voice-agent examples using Pipecat with NemotronASR / NemotronTTS services.
+- **[NVIDIA Pipecat voice-agent-examples](https://github.com/NVIDIA/voice-agent-examples)** `Official` — Voice-agent examples using Pipecat with NemotronASRService / NemotronTTSService (renamed from RivaASRService / RivaTTSService as of v0.4.0).
 - **[OpenAI-compatible NIM endpoints](https://docs.nvidia.com/nim/speech/latest/tts/index.html)** `Official` — TTS NIM exposes standard HTTP/gRPC APIs.
 
 ---
@@ -148,7 +160,7 @@ While not pure TTS, these products consume TTS output to animate digital humans.
 
 ## Learning Resources
 
-- **[NVIDIA TTS NIM Docs](https://docs.nvidia.com/nim/speech/latest/tts/index.html)** `Official`
+- **[NVIDIA Speech NIM Microservices Docs](https://docs.nvidia.com/nim/speech/latest/tts/index.html)** `Official`
 - **[Riva TTS Docs](https://docs.nvidia.com/deeplearning/riva/user-guide/docs/tts/index.html)** `Official`
 - **[NeMo TTS Docs](https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/tts/intro.html)** `Official`
 - **[NVIDIA ACE / Digital Humans](https://www.nvidia.com/en-us/ai/ace/)** `Official`
